@@ -19,12 +19,18 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
         Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+        Route::get('/my-posts', [PostController::class, 'myPosts'])->name('posts.my-posts');
     });
 
     // Likes et commentaires
     Route::post('/posts/{post}/like', [PostController::class, 'like'])->name('posts.like');
     Route::post('/posts/{post}/comments', [CommentController::class, 'store'])->name('comments.store');
     Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+
+    // ✅ Profil
+    Route::get('/profile/show', function() {
+        return view('profile.show');
+    })->name('profile.show');
 
 });
 
@@ -34,6 +40,9 @@ Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show')
 // Routes admin uniquement
 Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+    Route::get('/articles', [AdminController::class, 'articles'])->name('admin.articles');
+    Route::get('/comments', [AdminController::class, 'comments'])->name('admin.comments');
+    Route::get('/users', [AdminController::class, 'users'])->name('admin.users');
     Route::post('/posts/{post}/approve', [AdminController::class, 'approvePost'])->name('admin.approvePost');
     Route::post('/posts/{post}/reject', [AdminController::class, 'rejectPost'])->name('admin.rejectPost');
     Route::post('/comments/{comment}/approve', [AdminController::class, 'approveComment'])->name('admin.approveComment');

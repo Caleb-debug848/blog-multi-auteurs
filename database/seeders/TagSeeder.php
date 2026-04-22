@@ -9,7 +9,22 @@ class TagSeeder extends Seeder
 {
     public function run(): void
     {
-        $tags = ['Laravel', 'PHP', 'JavaScript', 'Linux', 'IA', 'Web'];
+        Tag::truncate();
+
+        $tags = [
+            'Cameroun',         // 1
+            'Économie',         // 2
+            'Agriculture',      // 3
+            'Numérique',        // 4
+            'Télécommunications', // 5
+            'Douane',           // 6
+            'Emploi',           // 7
+            'Énergie',          // 8
+            'Transport',        // 9
+            'Santé',            // 10
+            'Intelligence Artificielle', // 11
+            'Mobilité Verte',   // 12
+        ];
 
         foreach ($tags as $name) {
             Tag::create([

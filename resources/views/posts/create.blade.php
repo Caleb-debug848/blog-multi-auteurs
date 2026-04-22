@@ -4,7 +4,7 @@
 <div class="bg-white rounded shadow p-6">
     <h1 class="text-2xl font-bold mb-4">Nouvel article</h1>
 
-    <form method="POST" action="{{ route('posts.store') }}">
+    <form method="POST" action="{{ route('posts.store') }}" enctype="multipart/form-data">
         @csrf
 
         <div class="mb-4">
@@ -18,6 +18,12 @@
             <textarea name="body" rows="8"
                 class="w-full border rounded p-2" required>{{ old('body') }}</textarea>
         </div>
+
+        <div class="mb-4">
+        <label class="block font-semibold mb-1">Image de couverture</label>
+        <input type="file" name="image" accept="image/*"
+            class="w-full border rounded p-2">
+    </div>
 
         <div class="mb-4">
             <label class="block font-semibold mb-1">Catégorie</label>

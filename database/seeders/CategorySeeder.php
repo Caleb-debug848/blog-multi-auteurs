@@ -9,7 +9,12 @@ class CategorySeeder extends Seeder
 {
     public function run(): void
     {
-        $categories = ['Technologie', 'Science', 'Culture', 'Sport', 'Politique'];
+        Category::truncate();
+
+        $categories = [
+            'Actualité Cameroun',     // 1
+            'Tech & Innovation',      // 2
+        ];
 
         foreach ($categories as $name) {
             Category::create([

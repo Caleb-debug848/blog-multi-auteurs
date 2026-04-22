@@ -29,28 +29,35 @@ class PostController extends Controller
 
     // Enregistrer un post
     public function store(Request $request)
-    {
-        $request->validate([
-            'title'       => 'required|max:255',
-            'body'        => 'required',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+{
+    $request->validate([
+        'title'       => 'required|max:255',
+        'body'        => 'required',
+        'category_id' => 'required|exists:categories,id',
+        'image'       => 'nullable|image|max:2048',
+    ]);
 
-        $post = Post::create([
-            'title'       => $request->title,
-            'slug'        => Str::slug($request->title),
-            'body'        => $request->body,
-            'status'      => 'draft',
-            'user_id'     => auth()->id(),
-            'category_id' => $request->category_id,
-        ]);
-
-        if ($request->tags) {
-            $post->tags()->sync($request->tags);
-        }
-
-        return redirect()->route('posts.index')->with('success', 'Article créé avec succès !');
+    $imagePath = null;
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('posts', 'public');
     }
+
+    $post = Post::create([
+        'title'       => $request->title,
+        'slug'        => Str::slug($request->title),
+        'body'        => $request->body,
+        'image'       => $imagePath,
+        'status'      => 'draft',
+        'user_id'     => auth()->id(),
+        'category_id' => $request->category_id,
+    ]);
+
+    if ($request->tags) {
+        $post->tags()->sync($request->tags);
+    }
+
+    return redirect()->route('posts.index')->with('success', 'Article créé avec succès !');
+}
 
     // Afficher un post
     public function show(Post $post)
@@ -70,35 +77,34 @@ class PostController extends Controller
 
     // Mettre à jour un post
     public function update(Request $request, Post $post)
-    {
-        $this->authorize('update', $post);
-        $request->validate([
-            'title'       => 'required|max:255',
-            'body'        => 'required',
-            'category_id' => 'required|exists:categories,id',
-        ]);
+{
+    $this->authorize('update', $post);
+    $request->validate([
+        'title'       => 'required|max:255',
+        'body'        => 'required',
+        'category_id' => 'required|exists:categories,id',
+        'image'       => 'nullable|image|max:2048',
+    ]);
 
-        $post->update([
-            'title'       => $request->title,
-            'slug'        => Str::slug($request->title),
-            'body'        => $request->body,
-            'category_id' => $request->category_id,
-        ]);
-
-        if ($request->tags) {
-            $post->tags()->sync($request->tags);
-        }
-
-        return redirect()->route('posts.show', $post)->with('success', 'Article mis à jour !');
+    $imagePath = $post->image;
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('posts', 'public');
     }
 
-    // Supprimer un post
-    public function destroy(Post $post)
-    {
-        $this->authorize('delete', $post);
-        $post->delete();
-        return redirect()->route('posts.index')->with('success', 'Article supprimé !');
+    $post->update([
+        'title'       => $request->title,
+        'slug'        => Str::slug($request->title),
+        'body'        => $request->body,
+        'image'       => $imagePath,
+        'category_id' => $request->category_id,
+    ]);
+
+    if ($request->tags) {
+        $post->tags()->sync($request->tags);
     }
+
+    return redirect()->route('posts.show', $post)->with('success', 'Article mis à jour !');
+}
 
     // Liker un post
     public function like(Post $post)
@@ -111,4 +117,23 @@ class PostController extends Controller
         }
         return back();
     }
+
+    public function myPosts()
+{
+    $query = Post::where('user_id', auth()->id())
+                 ->with(['category', 'tags'])
+                 ->latest();
+
+    if (request('status')) {
+        $query->where('status', request('status'));
+    }
+
+    $posts    = $query->paginate(10);
+    $total    = Post::where('user_id', auth()->id())->count();
+    $pending  = Post::where('user_id', auth()->id())->where('status', 'draft')->count();
+    $rejected = Post::where('user_id', auth()->id())->where('status', 'rejected')->count();
+
+    return view('posts.my-posts', compact('posts', 'total', 'pending', 'rejected'));
+    }
+
 }
