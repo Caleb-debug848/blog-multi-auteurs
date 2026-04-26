@@ -40,7 +40,7 @@
 <div class="max-w-[1200px] mx-auto px-6 flex flex-col items-center">
 
     {{-- FLOATING LIKE BUTTON --}}
-    <div class="fixed right-8 top-1/2 -translate-y-1/2 hidden lg:flex flex-col gap-4 items-center z-40">
+    <div class="fixed right-4 bottom-24 lg:right-8 lg:top-1/2 lg:-translate-y-1/2 flex flex-col gap-4 items-center z-40">
         @auth
         <form method="POST" action="{{ route('posts.like', $post) }}">
             @csrf
