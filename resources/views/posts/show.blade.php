@@ -224,17 +224,20 @@
 
 <script>
 function sharePost() {
-    if (navigator.share) {
-        navigator.share({
-            title: '{{ addslashes($post->title) }}',
-            text: '{{ addslashes(Str::limit($post->body, 100)) }}',
-            url: window.location.href,
-        });
+    const url = window.location.href;
+    const title = '{{ addslashes($post->title) }}';
+
+    if (navigator.share && location.protocol === 'https:') {
+        navigator.share({ title: title, url: url });
     } else {
-        // Fallback : copier le lien
-        navigator.clipboard.writeText(window.location.href).then(() => {
-            alert('Lien copié dans le presse-papiers !');
-        });
+        // Fallback HTTP : copie manuelle
+        const input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        alert('✅ Lien copié : ' + url);
     }
 }
 </script>
