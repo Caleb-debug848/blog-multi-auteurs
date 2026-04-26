@@ -53,9 +53,10 @@
         <span class="text-xs font-news uppercase tracking-widest text-stone-400">
             {{ $post->likes->count() }}
         </span>
-        <button class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-stone-500 hover:text-[#B33A3A] transition-colors">
-            <span class="material-symbols-outlined">share</span>
-        </button>
+        <button onclick="sharePost()"
+        class="w-10 h-10 rounded-full bg-white shadow-md flex items-center justify-center text-stone-500 hover:text-[#B33A3A] transition-colors">
+    <span class="material-symbols-outlined">share</span>
+</button>
     </div>
 
     {{-- ARTICLE BODY --}}
@@ -219,6 +220,23 @@
         const percentage = Math.min(Math.max((scrolled / articleHeight) * 100, 0), 100);
         progress.style.width = percentage + '%';
     });
+</script>
+
+<script>
+function sharePost() {
+    if (navigator.share) {
+        navigator.share({
+            title: '{{ addslashes($post->title) }}',
+            text: '{{ addslashes(Str::limit($post->body, 100)) }}',
+            url: window.location.href,
+        });
+    } else {
+        // Fallback : copier le lien
+        navigator.clipboard.writeText(window.location.href).then(() => {
+            alert('Lien copié dans le presse-papiers !');
+        });
+    }
+}
 </script>
 
 @endsection
