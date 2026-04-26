@@ -77,11 +77,9 @@
 
         {{-- Body --}}
         <div class="space-y-6 text-lg leading-relaxed text-[#1d1b19]">
-            @foreach(explode("\n\n", $post->body) as $paragraph)
-                @if(trim($paragraph))
-                    <p>{{ trim($paragraph) }}</p>
-                @endif
-            @endforeach
+           {!! \League\CommonMark\CommonMarkConverter::class && class_exists('\League\CommonMark\CommonMarkConverter')
+    ? (new \League\CommonMark\CommonMarkConverter())->convert($post->body)
+    : nl2br(e($post->body)) !!}
         </div>
 
         {{-- Edit/Delete bar (author/admin) --}}
