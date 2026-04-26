@@ -9,6 +9,11 @@ use App\Http\Controllers\AdminController;
 // Page d'accueil
 Route::get('/', [PostController::class, 'index'])->name('posts.index');
 
+// ✅ Ajoute ces 3 lignes ici
+Route::get('/recherche', [PostController::class, 'search'])->name('posts.search');
+Route::get('/tendances', [PostController::class, 'trending'])->name('posts.trending');
+Route::get('/categories', [CategoryController::class, 'publicIndex'])->name('categories.public');
+
 // Routes authentifiées
 Route::middleware(['auth'])->group(function () {
 
@@ -54,5 +59,9 @@ Route::middleware(['auth', 'isAdmin'])->prefix('admin')->group(function () {
     Route::post('/tags', [TagController::class, 'store'])->name('tags.store');
     Route::delete('/tags/{tag}', [TagController::class, 'destroy'])->name('tags.destroy');
 });
+// Pages publiques
+Route::get('/categories', [CategoryController::class, 'publicIndex'])->name('categories.public');
+Route::get('/tendances', [PostController::class, 'trending'])->name('posts.trending');
+Route::get('/recherche', [PostController::class, 'search'])->name('posts.search');
 
 require __DIR__.'/auth.php';

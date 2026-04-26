@@ -19,6 +19,30 @@ class PostController extends Controller
         return view('posts.index', compact('posts'));
     }
 
+    public function trending()
+{
+    $posts = Post::where('status', 'published')
+                 ->with(['user', 'category', 'tags', 'likes'])
+                 ->withCount('likes')
+                 ->orderBy('likes_count', 'desc')
+                 ->paginate(10);
+    return view('posts.trending', compact('posts'));
+}
+
+public function search(Request $request)
+{
+    $query = $request->get('q');
+    $posts = Post::where('status', 'published')
+                 ->where(function($q) use ($query) {
+                     $q->where('title', 'like', "%{$query}%")
+                       ->orWhere('body', 'like', "%{$query}%");
+                 })
+                 ->with(['user', 'category', 'tags', 'likes'])
+                 ->latest()
+                 ->paginate(10);
+    return view('posts.search', compact('posts', 'query'));
+}
+
     // Formulaire de création
     public function create()
     {

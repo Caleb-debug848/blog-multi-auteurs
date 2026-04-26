@@ -34,15 +34,17 @@
         {{-- Nav Links --}}
         <div class="hidden md:flex items-center gap-8">
             <a href="{{ route('posts.index') }}"
-               class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.index') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
-                Accueil
-            </a>
-            <a href="#" class="font-news uppercase tracking-widest text-sm text-stone-600 hover:text-[#B33A3A] transition-colors">
-                Catégories
-            </a>
-            <a href="#" class="font-news uppercase tracking-widest text-sm text-stone-600 hover:text-[#B33A3A] transition-colors">
-                Tendances
-            </a>
+   class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.index') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
+    Accueil
+</a>
+<a href="{{ route('categories.public') }}"
+   class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('categories.public') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
+    Catégories
+</a>
+<a href="{{ route('posts.trending') }}"
+   class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.trending') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
+    Tendances
+</a>
         </div>
 
         {{-- Auth Buttons --}}
@@ -124,20 +126,19 @@
         <div class="text-[#B33A3A] font-headline italic text-3xl mb-8">
             Blog Multi-auteurs
         </div>
-        <div class="flex flex-wrap justify-center gap-8 mb-10">
-            <a href="#" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">À propos</a>
-            <a href="#" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Catégories</a>
-            <a href="#" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Tendances</a>
-        </div>
+        <a href="{{ route('posts.index') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Accueil</a>
+<a href="{{ route('categories.public') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Catégories</a>
+<a href="{{ route('posts.trending') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Tendances</a>
         <div class="w-full max-w-xs h-px bg-stone-800 mb-8"></div>
-        <div class="flex gap-6 mb-8 text-[#B33A3A]">
-            <span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors">social_leaderboard</span>
-            <span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors">share</span>
-            <span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors">rss_feed</span>
-        </div>
+        
         <div class="text-center text-xs opacity-60">
-            © {{ date('Y') }} Blog Multi-auteurs. Actualité & Innovation Cameroun.
-        </div>
+    © {{ date('Y') }} Blog Multi-auteurs. Développé avec ❤️ par
+    <a href="https://github.com/Caleb-debug848"
+       target="_blank"
+       class="text-[#E8956D] hover:text-white transition-colors font-bold underline underline-offset-2">
+        Caleb Dassi
+    </a>
+</div>
     </div>
 </footer>
 

@@ -254,9 +254,9 @@
                 <div style="margin-top:24px; padding-top:20px; border-top:1px solid #f2ede8; text-align:center;">
                     <p style="font-size:10px; color:#8b716f; text-transform:uppercase; letter-spacing:0.04em; margin:0;">
                         En vous inscrivant, vous acceptez nos
-                        <a href="#" style="text-decoration:underline; color:#8b716f;">Conditions</a>
-                        et notre
-                        <a href="#" style="text-decoration:underline; color:#8b716f;">Politique de confidentialité</a>.
+                        <a href="{{ url('/') }}" style="text-decoration:underline; color:#8b716f;">Conditions</a>
+et notre
+<a href="{{ url('/') }}" style="text-decoration:underline; color:#8b716f;">Politique de confidentialité</a>.
                     </p>
                 </div>
 

@@ -17,27 +17,34 @@
             <p class="text-lg text-[#584140] max-w-lg mb-8 leading-relaxed">
                 Le Cameroun sous toutes ses facettes — économie, société, technologie.
             </p>
-            <div class="flex items-center bg-white/70 backdrop-blur-sm rounded-xl p-2 max-w-md shadow-sm border border-[#dfbfbd]/30">
+            <form method="GET" action="{{ route('posts.search') }}"
+                  class="flex items-center bg-white/70 backdrop-blur-sm rounded-xl p-2 max-w-md shadow-sm border border-[#dfbfbd]/30">
                 <span class="material-symbols-outlined px-3 text-[#8b716f]">search</span>
-                <input class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium outline-none"
-                       placeholder="Rechercher un article..." type="text"/>
-                <button class="bg-[#922225] text-white px-6 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all">
+                <input type="text"
+                       name="q"
+                       class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium outline-none"
+                       placeholder="Rechercher un article..."/>
+                <button type="submit"
+                        class="bg-[#922225] text-white px-6 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all">
                     Découvrir
                 </button>
-            </div>
+            </form>
         </div>
+        {{-- ✅ Fermeture div Left --}}
 
         {{-- Right decorative card --}}
         <div class="hidden md:block relative">
             <div class="relative w-[380px] h-[280px] bg-white rounded-xl shadow-[0_20px_50px_rgba(179,58,58,0.1)] rotate-3 p-4 border border-[#dfbfbd]/20">
-               <img src="https://www.image2url.com/r2/default/images/1776601704294-0755c9e3-956d-4fd8-9db9-b1b519f68a39.jpg"
-     alt="Actualité Cameroun"
-     class="w-full h-full object-cover rounded-lg"/>
+                <img src="https://www.image2url.com/r2/default/images/1776601704294-0755c9e3-956d-4fd8-9db9-b1b519f68a39.jpg"
+                     alt="Actualité Cameroun"
+                     class="w-full h-full object-cover rounded-lg"/>
                 <div class="absolute -bottom-6 -left-6 bg-[#922225] p-6 rounded-xl shadow-xl -rotate-6">
-                    <span class="material-symbols-outlined text-white text-3xl" style="font-variation-settings: 'FILL' 1;">auto_stories</span>
+                    <span class="material-symbols-outlined text-white text-3xl"
+                          style="font-variation-settings: 'FILL' 1;">auto_stories</span>
                 </div>
             </div>
         </div>
+
     </div>
 </section>
 

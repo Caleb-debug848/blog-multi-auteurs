@@ -13,6 +13,12 @@ class CategoryController extends Controller
         return view('categories.index', compact('categories'));
     }
 
+    public function publicIndex()
+{
+    $categories = \App\Models\Category::withCount('posts')->get();
+    return view('categories.public', compact('categories'));
+}
+
     public function store(Request $request)
     {
         $request->validate(['name' => 'required|max:255']);
