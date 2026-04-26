@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
     // Liste des posts publiés (page d'accueil)
     public function index()
     {
