@@ -9,8 +9,10 @@ use Illuminate\Support\Str;
 class PostSeeder extends Seeder
 {
     public function run(): void
-    {
-        Post::truncate();
+{
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    Post::truncate();
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $author = User::where('role', 'author')->first();
 

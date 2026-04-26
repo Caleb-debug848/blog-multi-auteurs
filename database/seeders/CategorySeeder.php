@@ -8,8 +8,10 @@ use Illuminate\Support\Str;
 class CategorySeeder extends Seeder
 {
     public function run(): void
-    {
-        Category::truncate();
+{
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    Category::truncate();
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $categories = [
             'Actualité Cameroun',     // 1

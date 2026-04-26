@@ -8,8 +8,10 @@ use Illuminate\Support\Str;
 class TagSeeder extends Seeder
 {
     public function run(): void
-    {
-        Tag::truncate();
+{
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+    Tag::truncate(); // ou Post::truncate();
+    \Illuminate\Support\Facades\DB::statement('SET FOREIGN_KEY_CHECKS=1;');
 
         $tags = [
             'Cameroun',         // 1
