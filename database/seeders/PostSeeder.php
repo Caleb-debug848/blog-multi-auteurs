@@ -19,7 +19,7 @@ class PostSeeder extends Seeder
         $posts = [
             [
                 'title'       => 'Vie chère au Cameroun : le panier de la ménagère de plus en plus lourd',
-                'image'       => 'https://africapresse.com/wp-content/uploads/2024/02/agri20230823_NewsPic_shutterstock_1843289062_1200X675.jpg',
+                'image'       => 'https://www.newsducamer.com/wp-content/uploads/2021/05/2014_04_24_09_29_49_1211452463.jpg',
                 'category_id' => 1,
                 'tags'        => [1, 2],
                 'body'        => "Dans les marchés de Yaoundé et Douala, la réalité est brutale : le prix des denrées alimentaires de base a grimpé de façon alarmante ces derniers mois. Le riz, l'huile de palme, le poisson, le plantain — autant de produits essentiels qui pèsent désormais très lourd dans le budget des ménages camerounais.
