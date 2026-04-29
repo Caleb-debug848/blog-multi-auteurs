@@ -62,7 +62,7 @@
     <article class="flex flex-col md:flex-row gap-0 rounded-xl overflow-hidden bg-white shadow-[0_2px_16px_rgba(179,58,58,0.07)]">
         <div class="md:w-[58%] h-[400px] md:h-auto overflow-hidden">
             @if($featured->image)
-                <img src="{{ $featured->image }}"
+                <img src="{{ Str::startsWith($featured->image, 'http') ? $featured->image : asset('storage/' . $featured->image) }}"
                      alt="{{ $featured->title }}"
                      class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"/>
             @else
