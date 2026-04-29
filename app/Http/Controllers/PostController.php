@@ -59,7 +59,7 @@ public function search(Request $request)
         'title'       => 'required|max:255',
         'body'        => 'required',
         'category_id' => 'required|exists:categories,id',
-        'image'       => 'nullable|image|max:2048',
+        'image' => 'nullable|mimes:jpg,jpeg,png,webp,gif,bmp,svg|max:5120',
     ]);
 
     $imagePath = null;
@@ -108,7 +108,7 @@ public function search(Request $request)
         'title'       => 'required|max:255',
         'body'        => 'required',
         'category_id' => 'required|exists:categories,id',
-        'image'       => 'nullable|image|max:2048',
+        'image' => 'nullable|mimes:jpg,jpeg,png,webp,gif,bmp,svg|max:5120',
     ]);
 
     $imagePath = $post->image;
