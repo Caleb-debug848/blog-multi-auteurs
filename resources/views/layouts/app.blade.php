@@ -29,10 +29,24 @@
     <div class="flex justify-between items-center px-4 md:px-12 w-full max-w-screen-2xl mx-auto h-[68px]">
 
         {{-- Logo --}}
-        <a href="{{ route('posts.index') }}"
-           class="font-bold font-headline text-[#B33A3A] text-base md:text-xl leading-tight flex-shrink-0">
-            Blog Multi-auteurs
-        </a>
+        <a href="{{ route('posts.index') }}" class="flex items-center gap-3 flex-shrink-0">
+    <svg width="44" height="44" viewBox="0 0 70 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Couronne baobab -->
+        <ellipse cx="35" cy="28" rx="28" ry="18" fill="#B33A3A" opacity="0.15"/>
+        <ellipse cx="35" cy="25" rx="21" ry="14" fill="#B33A3A" opacity="0.25"/>
+        <ellipse cx="35" cy="22" rx="14" ry="10" fill="#B33A3A"/>
+        <!-- Tronc -->
+        <rect x="28" y="36" width="14" height="28" rx="3" fill="#B33A3A"/>
+        <!-- Racines -->
+        <path d="M28 64 Q18 70 10 75" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M35 64 Q35 70 35 76" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M42 64 Q52 70 60 75" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div class="leading-tight">
+        <p class="font-headline font-bold text-[#B33A3A] text-base md:text-lg italic leading-none">Blog Multi-auteurs</p>
+        <p class="text-[9px] font-bold uppercase tracking-widest text-[#8b716f] hidden md:block">Patrimoine & Innovation</p>
+    </div>
+</a>
 
         {{-- Nav Links Desktop --}}
         <div class="hidden md:flex items-center gap-8">

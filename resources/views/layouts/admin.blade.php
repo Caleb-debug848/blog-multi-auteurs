@@ -73,7 +73,21 @@
     {{-- Header sidebar --}}
     <div class="px-6 mb-6 flex items-center justify-between">
         <div>
-            <h1 class="text-[#B33A3A] font-headline text-xl font-bold italic">Blog Multi-auteurs</h1>
+            <div class="flex items-center gap-3">
+    <svg width="36" height="36" viewBox="0 0 70 80" fill="none">
+        <ellipse cx="35" cy="28" rx="28" ry="18" fill="#B33A3A" opacity="0.15"/>
+        <ellipse cx="35" cy="25" rx="21" ry="14" fill="#B33A3A" opacity="0.25"/>
+        <ellipse cx="35" cy="22" rx="14" ry="10" fill="#B33A3A"/>
+        <rect x="28" y="36" width="14" height="28" rx="3" fill="#B33A3A"/>
+        <path d="M28 64 Q18 70 10 75" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M35 64 Q35 70 35 76" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <path d="M42 64 Q52 70 60 75" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
+    </svg>
+    <div>
+        <h1 class="text-[#B33A3A] font-headline text-lg font-bold italic leading-none">Blog Multi-auteurs</h1>
+        <p class="text-stone-500 text-[9px] uppercase tracking-widest mt-0.5">Espace Administration</p>
+    </div>
+</div>
             <p class="text-stone-500 text-xs uppercase tracking-widest mt-1">Espace Administration</p>
         </div>
         {{-- Close button --}}
