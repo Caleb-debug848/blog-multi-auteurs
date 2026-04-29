@@ -61,7 +61,7 @@
 
     </div>
 
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+    <div class="grid grid-cols-1 xl:grid-cols-12 gap-8 items-start">
 
         {{-- Top Articles --}}
         <div class="lg:col-span-7 bg-white rounded-xl p-8 shadow-[0_2px_16px_rgba(179,58,58,0.03)]">

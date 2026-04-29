@@ -83,7 +83,7 @@
                            class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] rounded-t-xl transition-colors">
                             Mon profil
                         </a>
-                        @if(in_array(auth()->user()->role, ['admin', 'author']))
+                        @if(auth()->user()->role === 'author')
 <a href="{{ route('author.dashboard') }}"
    class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] transition-colors">
     Mon dashboard
@@ -163,7 +163,7 @@
     <span class="material-symbols-outlined text-lg">person</span>
     Mon profil
 </a>
-@if(in_array(auth()->user()->role, ['admin', 'author']))
+@if(auth()->user()->role === 'author')
 <a href="{{ route('author.dashboard') }}"
    class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
     <span class="material-symbols-outlined text-lg">dashboard</span>
