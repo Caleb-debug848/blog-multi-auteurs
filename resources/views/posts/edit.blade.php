@@ -46,7 +46,7 @@
             {{-- Image Section --}}
             <div class="relative group h-[400px] w-full rounded-xl overflow-hidden shadow-xl bg-[#ece7e2]">
                 @if($post->image)
-                    <img src="{{ $post->image }}"
+                    <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
                          alt="{{ $post->title }}"
                          class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                          id="current-image"/>

@@ -17,7 +17,7 @@
         <article class="bg-white rounded-xl overflow-hidden shadow-[0_2px_16px_rgba(179,58,58,0.07)] flex flex-col group hover:shadow-[0_6px_24px_rgba(179,58,58,0.13)] hover:-translate-y-1 transition-all duration-300">
             <div class="relative h-48 overflow-hidden">
                 @if($post->image)
-                    <img src="{{ $post->image }}" alt="{{ $post->title }}"
+                    <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}" alt="{{ $post->title }}"
                          class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"/>
                 @else
                     <div class="w-full h-full bg-gradient-to-br from-[#F5F0EB] to-[#fda77d]/20 flex items-center justify-center">

@@ -91,7 +91,7 @@
 
             <div class="w-full md:w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-[#f2ede8]">
                 @if($post->image)
-                    <img src="{{ $post->image }}"
+                    <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
                          alt="{{ $post->title }}"
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
                 @else

@@ -9,7 +9,7 @@
 {{-- HERO BANNER --}}
 <section class="relative w-full h-[460px] overflow-hidden">
     @if($post->image)
-        <img src="{{ $post->image }}"
+        <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
              alt="{{ $post->title }}"
              class="w-full h-full object-cover"/>
     @else

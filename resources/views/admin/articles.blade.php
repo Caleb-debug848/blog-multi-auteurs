@@ -42,7 +42,7 @@
                 <td class="px-6 py-5">
                     <div class="w-[60px] h-[60px] rounded-lg overflow-hidden bg-[#ece7e2]">
                         @if($post->image)
-                            <img src="{{ $post->image }}" alt="{{ $post->title }}" class="w-full h-full object-cover"/>
+                            <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover"/>
                         @else
                             <div class="w-full h-full flex items-center justify-center">
                                 <span class="material-symbols-outlined text-[#B33A3A] opacity-30">article</span>
@@ -115,7 +115,7 @@
         <div class="flex gap-4 p-4">
             <div class="w-16 h-16 rounded-lg overflow-hidden bg-[#ece7e2] flex-shrink-0">
                 @if($post->image)
-                    <img src="{{ $post->image }}" alt="{{ $post->title }}" class="w-full h-full object-cover"/>
+                    <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}" alt="{{ $post->title }}" class="w-full h-full object-cover"/>
                 @else
                     <div class="w-full h-full flex items-center justify-center">
                         <span class="material-symbols-outlined text-[#B33A3A] opacity-30">article</span>
