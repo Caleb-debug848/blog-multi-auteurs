@@ -14,50 +14,21 @@
         }
         body { background-color: #fef8f3; color: #1d1b19; font-family: 'Source Sans 3', sans-serif; }
         .font-headline { font-family: 'Playfair Display', serif; }
-
-        /* Sidebar */
-        #sidebar {
-            transition: transform 0.3s ease, width 0.3s ease;
-        }
-        #main-content {
-            transition: margin-left 0.3s ease;
-        }
-        /* Overlay mobile */
-        #sidebar-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.5);
-            z-index: 30;
-        }
-        #sidebar-overlay.active {
-            display: block;
-        }
-
+        #sidebar { transition: transform 0.3s ease; }
+        #main-content { transition: margin-left 0.3s ease; }
+        #sidebar-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 30; }
+        #sidebar-overlay.active { display: block; }
         .sidebar-active {
-            background-color: #B33A3A;
-            color: white;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            margin: 0.125rem 0;
+            background-color: #B33A3A; color: white; border-radius: 0.5rem;
+            display: flex; align-items: center; gap: 0.75rem;
+            padding: 0.75rem 1rem; margin: 0.125rem 0;
         }
         .sidebar-inactive {
-            color: #a8a29e;
-            border-radius: 0.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            padding: 0.75rem 1rem;
-            margin: 0.125rem 0;
-            transition: background-color 0.2s, color 0.2s;
+            color: #a8a29e; border-radius: 0.5rem; display: flex;
+            align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;
+            margin: 0.125rem 0; transition: background-color 0.2s, color 0.2s;
         }
-        .sidebar-inactive:hover {
-            background-color: rgba(68,64,60,0.5);
-            color: white;
-        }
+        .sidebar-inactive:hover { background-color: rgba(68,64,60,0.5); color: white; }
     </style>
 </head>
 <body class="min-h-screen">
@@ -72,25 +43,16 @@
 
     {{-- Header sidebar --}}
     <div class="px-6 mb-6 flex items-center justify-between">
-        <div>
-            <div class="flex items-center gap-3">
-    <svg width="36" height="36" viewBox="0 0 70 80" fill="none">
-        <ellipse cx="35" cy="28" rx="28" ry="18" fill="#B33A3A" opacity="0.15"/>
-        <ellipse cx="35" cy="25" rx="21" ry="14" fill="#B33A3A" opacity="0.25"/>
-        <ellipse cx="35" cy="22" rx="14" ry="10" fill="#B33A3A"/>
-        <rect x="28" y="36" width="14" height="28" rx="3" fill="#B33A3A"/>
-        <path d="M28 64 Q18 70 10 75" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M35 64 Q35 70 35 76" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
-        <path d="M42 64 Q52 70 60 75" stroke="#B33A3A" stroke-width="3" fill="none" stroke-linecap="round"/>
-    </svg>
-    <div>
-        <h1 class="text-[#B33A3A] font-headline text-lg font-bold italic leading-none">Blog Multi-auteurs</h1>
-        <p class="text-stone-500 text-[9px] uppercase tracking-widest mt-0.5">Espace Administration</p>
-    </div>
-</div>
-            <p class="text-stone-500 text-xs uppercase tracking-widest mt-1">Espace Administration</p>
+        <div class="flex items-center gap-3">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 C6 2 2 7 2 12 C2 10 5 6 10 6 C8 9 7 13 9 17 C7 15 4 18 4 22 C6 18 9 17 12 18 C15 17 18 18 20 22 C20 18 17 15 15 17 C17 13 16 9 14 6 C19 6 22 10 22 12 C22 7 18 2 12 2 Z" fill="#B33A3A"/>
+                <path d="M12 8 L12 20" stroke="#B33A3A" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <div>
+                <h1 class="text-[#B33A3A] font-headline text-base font-bold italic leading-none">Blog Multi-auteurs</h1>
+                <p class="text-stone-500 text-[9px] uppercase tracking-widest mt-0.5">Espace Administration</p>
+            </div>
         </div>
-        {{-- Close button --}}
         <button onclick="closeSidebar()"
                 class="text-stone-400 hover:text-white transition-colors p-1 rounded-lg hover:bg-stone-800">
             <span class="material-symbols-outlined">close</span>
@@ -146,8 +108,7 @@
 
     {{-- Bottom --}}
     <div class="px-4 pt-6 mt-auto border-t border-stone-800 space-y-1">
-        <a href="{{ route('posts.index') }}"
-           class="sidebar-inactive">
+        <a href="{{ route('posts.index') }}" class="sidebar-inactive">
             <span class="material-symbols-outlined">open_in_new</span>
             <span class="font-medium text-sm">Voir le site</span>
         </a>
@@ -164,14 +125,20 @@
 {{-- TOP BAR --}}
 <div class="fixed top-0 left-0 right-0 z-30 h-14 bg-white border-b border-[#E2D9D0] flex items-center px-4 gap-4 shadow-sm">
 
-    {{-- Burger button --}}
+    {{-- Burger --}}
     <button onclick="toggleSidebar()"
             class="p-2 rounded-lg hover:bg-[#F5F0EB] text-[#B33A3A] transition-colors">
         <span class="material-symbols-outlined" id="burger-icon">menu</span>
     </button>
 
-    {{-- Logo --}}
-    <span class="font-headline text-[#B33A3A] font-bold text-lg">Blog Multi-auteurs</span>
+    {{-- Logo topbar --}}
+    <a href="{{ route('posts.index') }}" class="flex items-center gap-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+            <path d="M12 2 C6 2 2 7 2 12 C2 10 5 6 10 6 C8 9 7 13 9 17 C7 15 4 18 4 22 C6 18 9 17 12 18 C15 17 18 18 20 22 C20 18 17 15 15 17 C17 13 16 9 14 6 C19 6 22 10 22 12 C22 7 18 2 12 2 Z" fill="#B33A3A"/>
+            <path d="M12 8 L12 20" stroke="#B33A3A" stroke-width="1.2" stroke-linecap="round"/>
+        </svg>
+        <span class="font-headline text-[#B33A3A] font-bold italic text-lg">Blog Multi-auteurs</span>
+    </a>
     <span class="text-stone-400 text-xs uppercase tracking-widest hidden md:block">— Administration</span>
 
     {{-- Right --}}
@@ -205,15 +172,21 @@
 {{-- Footer --}}
 <footer id="main-footer" class="py-8 px-8 border-t-4 border-[#B33A3A] bg-[#1A1A1A] text-stone-400 transition-all duration-300">
     <div class="flex flex-col items-center gap-2">
-        <h5 class="text-[#B33A3A] font-headline italic text-lg">Blog Multi-auteurs</h5>
+        <div class="flex items-center gap-2">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M12 2 C6 2 2 7 2 12 C2 10 5 6 10 6 C8 9 7 13 9 17 C7 15 4 18 4 22 C6 18 9 17 12 18 C15 17 18 18 20 22 C20 18 17 15 15 17 C17 13 16 9 14 6 C19 6 22 10 22 12 C22 7 18 2 12 2 Z" fill="#B33A3A"/>
+                <path d="M12 8 L12 20" stroke="#B33A3A" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+            <h5 class="text-[#B33A3A] font-headline italic text-lg">Blog Multi-auteurs</h5>
+        </div>
         <p class="text-sm">
-    © {{ date('Y') }} Blog Multi-auteurs. Développé avec ❤️ par
-    <a href="https://github.com/Caleb-debug848"
-       target="_blank"
-       class="text-[#E8956D] hover:text-white transition-colors font-bold">
-        Caleb Dassi
-    </a>
-</p>
+            © {{ date('Y') }} Blog Multi-auteurs. Développé avec ❤️ par
+            <a href="https://github.com/Caleb-debug848"
+               target="_blank"
+               class="text-[#E8956D] hover:text-white transition-colors font-bold">
+                Caleb Dassi
+            </a>
+        </p>
     </div>
 </footer>
 
@@ -225,8 +198,6 @@
         document.getElementById('sidebar-overlay').classList.add('active');
         document.getElementById('burger-icon').textContent = 'menu_open';
         sidebarOpen = true;
-
-        // Sur desktop, pousse le contenu
         if (window.innerWidth >= 1024) {
             document.getElementById('main-content').style.marginLeft = '260px';
             document.getElementById('main-footer').style.marginLeft = '260px';
@@ -246,7 +217,6 @@
         sidebarOpen ? closeSidebar() : openSidebar();
     }
 
-    // Auto-dismiss flash message
     setTimeout(() => {
         const flash = document.getElementById('flash-msg');
         if (flash) flash.style.display = 'none';
