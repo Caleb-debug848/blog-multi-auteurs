@@ -84,6 +84,12 @@
                             Mon profil
                         </a>
                         @if(in_array(auth()->user()->role, ['admin', 'author']))
+<a href="{{ route('author.dashboard') }}"
+   class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] transition-colors">
+    Mon dashboard
+</a>
+@endif
+                        @if(in_array(auth()->user()->role, ['admin', 'author']))
                         <a href="{{ route('posts.my-posts') }}"
                            class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] transition-colors">
                             Mes articles
@@ -153,10 +159,17 @@
 
             @auth
                 <a href="{{ route('profile.show') }}"
-                   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
-                    <span class="material-symbols-outlined text-lg">person</span>
-                    Mon profil
-                </a>
+   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
+    <span class="material-symbols-outlined text-lg">person</span>
+    Mon profil
+</a>
+@if(in_array(auth()->user()->role, ['admin', 'author']))
+<a href="{{ route('author.dashboard') }}"
+   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
+    <span class="material-symbols-outlined text-lg">dashboard</span>
+    Mon dashboard
+</a>
+@endif
                 @if(in_array(auth()->user()->role, ['admin', 'author']))
                 <a href="{{ route('posts.my-posts') }}"
                    class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">

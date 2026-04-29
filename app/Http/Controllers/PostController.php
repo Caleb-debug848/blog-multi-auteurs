@@ -87,8 +87,10 @@ public function search(Request $request)
     // Afficher un post
     public function show(Post $post)
     {
-        $post->load(['user', 'category', 'tags', 'comments.user']);
-        return view('posts.show', compact('post'));
+        // Incrémenter les vues
+    $post->increment('views');
+    $post->load(['user', 'category', 'tags', 'comments.user', 'likes']);
+    return view('posts.show', compact('post'));
     }
 
     // Formulaire d'édition

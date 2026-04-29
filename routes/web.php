@@ -25,6 +25,8 @@ Route::middleware(['auth'])->group(function () {
         Route::put('/posts/{post}', [PostController::class, 'update'])->name('posts.update');
         Route::delete('/posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
         Route::get('/my-posts', [PostController::class, 'myPosts'])->name('posts.my-posts');
+        Route::get('/author/dashboard', [App\Http\Controllers\AuthorDashboardController::class, 'index'])->name('author.dashboard');
+
     });
 
     // Likes et commentaires
