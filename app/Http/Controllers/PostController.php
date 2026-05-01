@@ -11,14 +11,29 @@ class PostController extends Controller
 {
     use \Illuminate\Foundation\Auth\Access\AuthorizesRequests;
     // Liste des posts publiés (page d'accueil)
-    public function index()
-    {
-        $posts = Post::where('status', 'published')
-                     ->with(['user', 'category', 'tags'])
-                     ->latest()
-                     ->paginate(10);
-        return view('posts.index', compact('posts'));
-    }
+    public function index(Request $request)
+{
+    $query    = $request->get('q');
+    $category = $request->get('category');
+
+    $posts = Post::where('status', 'published')
+        ->when($query, function($q) use ($query) {
+            $q->where(function($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                  ->orWhere('body', 'like', "%{$query}%");
+            });
+        })
+        ->when($category, function($q) use ($category) {
+            $q->where('category_id', $category);
+        })
+        ->with(['user', 'category', 'tags', 'likes'])
+        ->latest()
+        ->paginate(10);
+
+    $categories = \App\Models\Category::withCount('posts')->get();
+
+    return view('posts.index', compact('posts', 'categories', 'query', 'category'));
+}
 
     public function trending()
 {

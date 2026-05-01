@@ -3,7 +3,7 @@
 @section('content')
 
 {{-- HERO --}}
-<section class="relative h-[500px] overflow-hidden flex items-center bg-gradient-to-br from-[#F5F0EB] to-[#f2ede8] kente-pattern">
+<section class="relative overflow-hidden flex items-center bg-gradient-to-br from-[#F5F0EB] to-[#f2ede8] kente-pattern py-16 md:py-20">
     <div class="max-w-screen-2xl mx-auto px-6 md:px-12 grid md:grid-cols-2 gap-12 items-center w-full">
 
         {{-- Left --}}
@@ -11,26 +11,61 @@
             <span class="inline-block px-3 py-1 bg-[#fda77d] text-[#351000] text-[10px] uppercase tracking-[0.2em] font-bold rounded-full mb-6">
                 🌍 Actualité Cameroun & Innovation
             </span>
-            <h1 class="text-5xl md:text-[60px] font-headline font-black text-[#922225] leading-[1.1] mb-6">
+            <h1 class="text-4xl md:text-[56px] font-headline font-black text-[#922225] leading-[1.1] mb-6">
                 L'actualité qui vous ressemble
             </h1>
-            <p class="text-lg text-[#584140] max-w-lg mb-8 leading-relaxed">
+            <p class="text-lg text-[#584140] max-w-lg mb-6 leading-relaxed">
                 Le Cameroun sous toutes ses facettes — économie, société, technologie.
             </p>
-            <form method="GET" action="{{ route('posts.search') }}"
-                  class="flex items-center bg-white/70 backdrop-blur-sm rounded-xl p-2 max-w-md shadow-sm border border-[#dfbfbd]/30">
-                <span class="material-symbols-outlined px-3 text-[#8b716f]">search</span>
-                <input type="text"
-                       name="q"
-                       class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium outline-none"
-                       placeholder="Rechercher un article..."/>
-                <button type="submit"
-                        class="bg-[#922225] text-white px-6 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all">
-                    Découvrir
-                </button>
+
+            {{-- Barre de recherche --}}
+            <form method="GET" action="{{ route('posts.index') }}" id="search-form">
+                @if($category)
+                <input type="hidden" name="category" value="{{ $category }}"/>
+                @endif
+                <div class="flex items-center bg-white/80 backdrop-blur-sm rounded-xl p-1.5 max-w-md shadow-sm border border-[#dfbfbd]/30 mb-4">
+                    <span class="material-symbols-outlined px-3 text-[#8b716f]">search</span>
+                    <input type="text"
+                           name="q"
+                           value="{{ $query }}"
+                           id="search-input"
+                           class="bg-transparent border-none focus:ring-0 w-full text-sm font-medium outline-none py-2"
+                           placeholder="Rechercher un article..."/>
+                    <button type="submit"
+                            class="bg-[#922225] text-white px-5 py-2 rounded-lg font-bold text-sm hover:brightness-110 transition-all">
+                        Découvrir
+                    </button>
+                </div>
             </form>
+
+            {{-- Pills catégories --}}
+            <div class="flex flex-wrap gap-2 max-w-md">
+                <a href="{{ route('posts.index', array_filter(['q' => $query])) }}"
+                   class="px-4 py-1.5 rounded-full text-xs font-bold transition-all {{ !$category ? 'bg-[#B33A3A] text-white shadow-md' : 'bg-white/70 text-[#584140] hover:bg-white border border-[#dfbfbd]/40' }}">
+                    Tous
+                </a>
+                @foreach($categories as $cat)
+                <a href="{{ route('posts.index', array_filter(['q' => $query, 'category' => $cat->id])) }}"
+                   class="px-4 py-1.5 rounded-full text-xs font-bold transition-all {{ $category == $cat->id ? 'bg-[#B33A3A] text-white shadow-md' : 'bg-white/70 text-[#584140] hover:bg-white border border-[#dfbfbd]/40' }}">
+                    {{ $cat->name }}
+                    <span class="opacity-60">({{ $cat->posts_count }})</span>
+                </a>
+                @endforeach
+            </div>
+
+            {{-- Filtre actif --}}
+            @if($query || $category)
+            <div class="flex items-center gap-2 mt-3">
+                <span class="text-xs text-[#584140]">
+                    {{ $posts->total() }} article(s) trouvé(s)
+                </span>
+                <a href="{{ route('posts.index') }}"
+                   class="text-xs text-[#B33A3A] font-bold hover:underline flex items-center gap-1">
+                    Effacer ✕
+                </a>
+            </div>
+            @endif
         </div>
-        {{-- ✅ Fermeture div Left --}}
 
         {{-- Right decorative card --}}
         <div class="hidden md:block relative">
@@ -44,7 +79,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </section>
 

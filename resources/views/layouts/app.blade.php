@@ -50,10 +50,7 @@
                class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.trending') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
                 Tendances
             </a>
-            <a href="{{ route('posts.search') }}"
-               class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.search') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
-                Recherche
-            </a>
+            
         </div>
 
         {{-- Right side --}}
@@ -155,11 +152,7 @@
                 <span class="material-symbols-outlined text-lg">trending_up</span>
                 Tendances
             </a>
-            <a href="{{ route('posts.search') }}"
-               class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.search') ? 'text-[#B33A3A] bg-[#B33A3A]/5 font-bold' : 'text-stone-600' }} hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
-                <span class="material-symbols-outlined text-lg">search</span>
-                Recherche
-            </a>
+            
 
             <div class="border-t border-stone-200 my-2"></div>
 
@@ -253,7 +246,6 @@
             <a href="{{ route('posts.index') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Accueil</a>
             <a href="{{ route('categories.public') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Catégories</a>
             <a href="{{ route('posts.trending') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Tendances</a>
-            <a href="{{ route('posts.search') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Recherche</a>
         </div>
         <div class="w-full max-w-xs h-px bg-stone-800 mb-8"></div>
         <div class="text-center text-xs opacity-60">
