@@ -25,7 +25,6 @@
 {{-- NAVBAR --}}
 <nav class="fixed top-0 w-full z-50 bg-[#F5F0EB]/95 backdrop-blur-xl border-b border-stone-200/20 shadow-sm">
 
-    {{-- Main bar --}}
     <div class="flex justify-between items-center px-4 md:px-12 w-full max-w-screen-2xl mx-auto h-[68px]">
 
         {{-- Logo --}}
@@ -51,13 +50,16 @@
                class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.trending') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
                 Tendances
             </a>
+            <a href="{{ route('posts.search') }}"
+               class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.search') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
+                Recherche
+            </a>
         </div>
 
         {{-- Right side --}}
         <div class="flex items-center gap-2 md:gap-4">
 
             @auth
-                {{-- Admin link desktop --}}
                 @if(auth()->user()->role === 'admin')
                     <a href="{{ route('admin.index') }}"
                        class="hidden md:block font-news uppercase tracking-widest text-xs text-stone-600 hover:text-[#B33A3A] transition-colors">
@@ -65,7 +67,6 @@
                     </a>
                 @endif
 
-                {{-- New article desktop --}}
                 @if(in_array(auth()->user()->role, ['admin', 'author']))
                     <a href="{{ route('posts.create') }}"
                        class="hidden md:block font-news uppercase tracking-widest text-xs font-bold text-stone-600 hover:text-[#B33A3A] transition-colors">
@@ -84,11 +85,11 @@
                             Mon profil
                         </a>
                         @if(auth()->user()->role === 'author')
-<a href="{{ route('author.dashboard') }}"
-   class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] transition-colors">
-    Mon dashboard
-</a>
-@endif
+                        <a href="{{ route('author.dashboard') }}"
+                           class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] transition-colors">
+                            Mon dashboard
+                        </a>
+                        @endif
                         @if(in_array(auth()->user()->role, ['admin', 'author']))
                         <a href="{{ route('posts.my-posts') }}"
                            class="block px-4 py-3 text-sm text-stone-700 hover:text-[#B33A3A] hover:bg-[#F5F0EB] transition-colors">
@@ -154,22 +155,27 @@
                 <span class="material-symbols-outlined text-lg">trending_up</span>
                 Tendances
             </a>
+            <a href="{{ route('posts.search') }}"
+               class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.search') ? 'text-[#B33A3A] bg-[#B33A3A]/5 font-bold' : 'text-stone-600' }} hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
+                <span class="material-symbols-outlined text-lg">search</span>
+                Recherche
+            </a>
 
             <div class="border-t border-stone-200 my-2"></div>
 
             @auth
                 <a href="{{ route('profile.show') }}"
-   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
-    <span class="material-symbols-outlined text-lg">person</span>
-    Mon profil
-</a>
-@if(auth()->user()->role === 'author')
-<a href="{{ route('author.dashboard') }}"
-   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
-    <span class="material-symbols-outlined text-lg">dashboard</span>
-    Mon dashboard
-</a>
-@endif
+                   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
+                    <span class="material-symbols-outlined text-lg">person</span>
+                    Mon profil
+                </a>
+                @if(auth()->user()->role === 'author')
+                <a href="{{ route('author.dashboard') }}"
+                   class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
+                    <span class="material-symbols-outlined text-lg">dashboard</span>
+                    Mon dashboard
+                </a>
+                @endif
                 @if(in_array(auth()->user()->role, ['admin', 'author']))
                 <a href="{{ route('posts.my-posts') }}"
                    class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm text-stone-600 hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
@@ -247,6 +253,7 @@
             <a href="{{ route('posts.index') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Accueil</a>
             <a href="{{ route('categories.public') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Catégories</a>
             <a href="{{ route('posts.trending') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Tendances</a>
+            <a href="{{ route('posts.search') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Recherche</a>
         </div>
         <div class="w-full max-w-xs h-px bg-stone-800 mb-8"></div>
         <div class="text-center text-xs opacity-60">
