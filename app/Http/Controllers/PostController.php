@@ -32,16 +32,40 @@ class PostController extends Controller
 
 public function search(Request $request)
 {
-    $query = $request->get('q');
+    $query    = $request->get('q');
+    $category = $request->get('category');
+    $author   = $request->get('author');
+    $date     = $request->get('date');
+
     $posts = Post::where('status', 'published')
-                 ->where(function($q) use ($query) {
-                     $q->where('title', 'like', "%{$query}%")
-                       ->orWhere('body', 'like', "%{$query}%");
-                 })
-                 ->with(['user', 'category', 'tags', 'likes'])
-                 ->latest()
-                 ->paginate(10);
-    return view('posts.search', compact('posts', 'query'));
+        ->when($query, function($q) use ($query) {
+            $q->where(function($q) use ($query) {
+                $q->where('title', 'like', "%{$query}%")
+                  ->orWhere('body', 'like', "%{$query}%");
+            });
+        })
+        ->when($category, function($q) use ($category) {
+            $q->where('category_id', $category);
+        })
+        ->when($author, function($q) use ($author) {
+            $q->where('user_id', $author);
+        })
+        ->when($date, function($q) use ($date) {
+            match($date) {
+                'week'  => $q->where('created_at', '>=', now()->subWeek()),
+                'month' => $q->where('created_at', '>=', now()->subMonth()),
+                'year'  => $q->where('created_at', '>=', now()->subYear()),
+                default => null
+            };
+        })
+        ->with(['user', 'category', 'tags', 'likes'])
+        ->latest()
+        ->paginate(9);
+
+    $categories = \App\Models\Category::all();
+    $authors    = \App\Models\User::whereIn('role', ['admin', 'author'])->get();
+
+    return view('posts.search', compact('posts', 'query', 'category', 'author', 'date', 'categories', 'authors'));
 }
 
     // Formulaire de création
