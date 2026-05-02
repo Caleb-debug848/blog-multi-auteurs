@@ -32,6 +32,11 @@
                 <span>{{ $post->created_at->format('d M Y') }}</span>
                 <span class="w-1 h-1 bg-white rounded-full"></span>
                 <span>{{ ceil(str_word_count($post->body) / 200) }} min de lecture</span>
+                <span class="w-1 h-1 bg-white rounded-full"></span>
+<span class="flex items-center gap-1">
+    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">visibility</span>
+    {{ number_format($post->views) }} vue(s)
+</span>
             </div>
         </div>
     </div>

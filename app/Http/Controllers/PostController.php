@@ -187,8 +187,8 @@ public function search(Request $request)
     public function myPosts()
 {
     $query = Post::where('user_id', auth()->id())
-                 ->with(['category', 'tags'])
-                 ->latest();
+             ->with(['category', 'tags', 'likes', 'comments'])
+             ->latest();
 
     if (request('status')) {
         $query->where('status', request('status'));

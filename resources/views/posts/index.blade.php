@@ -166,10 +166,16 @@
                         <span class="text-[10px] text-[#584140] font-medium uppercase tracking-widest">
                             {{ $post->created_at->format('d M Y') }}
                         </span>
-                        <div class="flex items-center gap-1 text-[#B33A3A]">
-                            <span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">favorite</span>
-                            <span class="text-xs font-bold">{{ $post->likes->count() }}</span>
-                        </div>
+                        <div class="flex items-center gap-3">
+    <div class="flex items-center gap-1 text-[#B33A3A]">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">favorite</span>
+        <span class="text-xs font-bold">{{ $post->likes->count() }}</span>
+    </div>
+    <div class="flex items-center gap-1 text-stone-400">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">visibility</span>
+        <span class="text-xs font-bold">{{ $post->views }}</span>
+    </div>
+</div>
                     </div>
                     <h4 class="text-xl font-headline font-bold mb-3 group-hover:text-[#B33A3A] transition-colors line-clamp-2">
                         <a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a>

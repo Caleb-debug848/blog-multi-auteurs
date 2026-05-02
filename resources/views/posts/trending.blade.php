@@ -40,12 +40,18 @@
                     {{ Str::limit($post->body, 120) }}
                 </p>
                 <div class="flex items-center justify-between mt-4 pt-4 border-t border-[#E2D9D0]">
-                    <span class="text-xs text-[#584140]">Par {{ $post->user->name }}</span>
-                    <a href="{{ route('posts.show', $post) }}"
-                       class="text-xs font-bold text-[#B33A3A] hover:underline">
-                        Lire →
-                    </a>
-                </div>
+    <div class="flex items-center gap-3 text-xs text-stone-400">
+        <span class="text-[#584140]">Par {{ $post->user->name }}</span>
+        <span class="flex items-center gap-1">
+            <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">visibility</span>
+            {{ $post->views }}
+        </span>
+    </div>
+    <a href="{{ route('posts.show', $post) }}"
+       class="text-xs font-bold text-[#B33A3A] hover:underline">
+        Lire →
+    </a>
+</div>
             </div>
         </article>
         @empty

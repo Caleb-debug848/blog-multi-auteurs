@@ -111,8 +111,22 @@
                     </span>
                 </div>
                 <h3 class="font-headline text-lg font-bold text-[#1d1b19] truncate">
-                    {{ $post->title }}
-                </h3>
+    {{ $post->title }}
+</h3>
+<div class="flex items-center gap-4 mt-1">
+    <span class="flex items-center gap-1 text-xs text-stone-400">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">visibility</span>
+        {{ number_format($post->views) }} vue(s)
+    </span>
+    <span class="flex items-center gap-1 text-xs text-stone-400">
+        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">favorite</span>
+        {{ $post->likes->count() }} like(s)
+    </span>
+    <span class="flex items-center gap-1 text-xs text-stone-400">
+        <span class="material-symbols-outlined text-sm">forum</span>
+        {{ $post->comments->count() }} commentaire(s)
+    </span>
+</div>
             </div>
 
             <div class="flex items-center gap-6 flex-shrink-0">
