@@ -42,10 +42,6 @@
                class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.index') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
                 Accueil
             </a>
-            <a href="{{ route('categories.public') }}"
-               class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('categories.public') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
-                Catégories
-            </a>
             <a href="{{ route('posts.trending') }}"
                class="font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.trending') ? 'text-[#B33A3A] border-b-2 border-[#B33A3A] pb-1 font-bold' : 'text-stone-600 hover:text-[#B33A3A] transition-colors' }}">
                 Tendances
@@ -136,17 +132,6 @@
     <div id="mobile-menu"
          class="md:hidden hidden bg-[#F5F0EB]/98 backdrop-blur-xl border-t border-stone-200/30 shadow-lg">
         <div class="px-6 py-4 space-y-1 max-w-screen-2xl mx-auto">
-
-            <a href="{{ route('posts.index') }}"
-               class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.index') ? 'text-[#B33A3A] bg-[#B33A3A]/5 font-bold' : 'text-stone-600' }} hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
-                <span class="material-symbols-outlined text-lg">home</span>
-                Accueil
-            </a>
-            <a href="{{ route('categories.public') }}"
-               class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm {{ request()->routeIs('categories.public') ? 'text-[#B33A3A] bg-[#B33A3A]/5 font-bold' : 'text-stone-600' }} hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
-                <span class="material-symbols-outlined text-lg">category</span>
-                Catégories
-            </a>
             <a href="{{ route('posts.trending') }}"
                class="flex items-center gap-3 px-3 py-3 rounded-xl font-news uppercase tracking-widest text-sm {{ request()->routeIs('posts.trending') ? 'text-[#B33A3A] bg-[#B33A3A]/5 font-bold' : 'text-stone-600' }} hover:bg-[#B33A3A]/5 hover:text-[#B33A3A] transition-colors">
                 <span class="material-symbols-outlined text-lg">trending_up</span>
@@ -244,7 +229,6 @@
         </div>
         <div class="flex flex-wrap justify-center gap-6 md:gap-8 mb-8">
             <a href="{{ route('posts.index') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Accueil</a>
-            <a href="{{ route('categories.public') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Catégories</a>
             <a href="{{ route('posts.trending') }}" class="text-stone-500 hover:text-[#E8956D] transition-all duration-300">Tendances</a>
         </div>
         <div class="w-full max-w-xs h-px bg-stone-800 mb-8"></div>
