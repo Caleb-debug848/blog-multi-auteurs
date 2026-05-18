@@ -85,51 +85,60 @@
     </div>
 
     {{-- Article List --}}
-    <div class="space-y-4">
-        @forelse($posts as $post)
-        <div class="bg-white rounded-xl p-4 flex flex-col md:flex-row items-center gap-6 border border-[#E2D9D0] group hover:shadow-[0_4px_24px_rgba(179,58,58,0.06)] transition-all">
+<div class="space-y-4">
+    @forelse($posts as $post)
+    <div class="bg-white rounded-xl overflow-hidden border border-[#E2D9D0] group hover:shadow-[0_4px_24px_rgba(179,58,58,0.06)] transition-all">
 
-            <div class="w-full md:w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 bg-[#f2ede8]">
-                @if($post->image)
-                    <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
-                         alt="{{ $post->title }}"
-                         class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
-                @else
-                    <div class="w-full h-full flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[#B33A3A] opacity-30 text-3xl">article</span>
-                    </div>
-                @endif
-            </div>
-
-            <div class="flex-grow min-w-0">
-                <div class="flex flex-wrap items-center gap-3 mb-1">
-                    <span class="text-[10px] font-bold uppercase tracking-[0.15em] text-[#8f4c2a]">
-                        {{ $post->category->name }}
-                    </span>
-                    <span class="text-[10px] font-medium uppercase tracking-[0.1em] text-[#584140]/60">
-                        • {{ $post->created_at->format('d M Y') }}
-                    </span>
+        {{-- Image --}}
+        <div class="w-full h-48 overflow-hidden bg-[#f2ede8]">
+            @if($post->image)
+                <img src="{{ Str::startsWith($post->image, 'http') ? $post->image : asset('storage/' . $post->image) }}"
+                     alt="{{ $post->title }}"
+                     class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"/>
+            @else
+                <div class="w-full h-full flex items-center justify-center">
+                    <span class="material-symbols-outlined text-[#B33A3A] opacity-30 text-4xl">article</span>
                 </div>
-                <h3 class="font-headline text-lg font-bold text-[#1d1b19] truncate">
-    {{ $post->title }}
-</h3>
-<div class="flex items-center gap-4 mt-1">
-    <span class="flex items-center gap-1 text-xs text-stone-400">
-        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">visibility</span>
-        {{ number_format($post->views) }} vue(s)
-    </span>
-    <span class="flex items-center gap-1 text-xs text-stone-400">
-        <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">favorite</span>
-        {{ $post->likes->count() }} like(s)
-    </span>
-    <span class="flex items-center gap-1 text-xs text-stone-400">
-        <span class="material-symbols-outlined text-sm">forum</span>
-        {{ $post->comments->count() }} commentaire(s)
-    </span>
-</div>
+            @endif
+        </div>
+
+        {{-- Content --}}
+        <div class="p-4">
+
+            {{-- Catégorie + Date --}}
+            <div class="flex items-center gap-2 mb-2">
+                <span class="text-[10px] font-bold uppercase tracking-widest text-[#8f4c2a]">
+                    {{ $post->category->name }}
+                </span>
+                <span class="text-stone-300">•</span>
+                <span class="text-[10px] text-[#584140]/60 uppercase tracking-widest">
+                    {{ $post->created_at->format('d M Y') }}
+                </span>
             </div>
 
-            <div class="flex items-center gap-6 flex-shrink-0">
+            {{-- Titre --}}
+            <h3 class="font-headline text-base font-bold text-[#1d1b19] mb-3 line-clamp-2">
+                {{ $post->title }}
+            </h3>
+
+            {{-- Stats --}}
+            <div class="flex items-center gap-4 mb-4">
+                <span class="flex items-center gap-1 text-xs text-stone-400">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">visibility</span>
+                    {{ number_format($post->views) }}
+                </span>
+                <span class="flex items-center gap-1 text-xs text-stone-400">
+                    <span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">favorite</span>
+                    {{ $post->likes->count() }}
+                </span>
+                <span class="flex items-center gap-1 text-xs text-stone-400">
+                    <span class="material-symbols-outlined text-sm">forum</span>
+                    {{ $post->comments->count() }}
+                </span>
+            </div>
+
+            {{-- Statut + Actions --}}
+            <div class="flex items-center justify-between">
                 @if($post->status === 'published')
                     <span class="px-3 py-1 bg-[#005650]/10 text-[#005650] text-[10px] font-bold uppercase tracking-widest rounded-full">Publié</span>
                 @elseif($post->status === 'draft')
@@ -154,18 +163,19 @@
             </div>
 
         </div>
-        @empty
-        <div class="text-center py-20">
-            <span class="material-symbols-outlined text-6xl text-[#B33A3A] opacity-20">article</span>
-            <p class="text-[#584140] mt-4 font-headline text-xl">Vous n'avez pas encore d'articles</p>
-            <a href="{{ route('posts.create') }}"
-               class="inline-flex items-center gap-2 mt-6 bg-[#B33A3A] text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-all">
-                <span class="material-symbols-outlined text-sm">add</span>
-                Créer mon premier article
-            </a>
-        </div>
-        @endforelse
     </div>
+    @empty
+    <div class="text-center py-20">
+        <span class="material-symbols-outlined text-6xl text-[#B33A3A] opacity-20">article</span>
+        <p class="text-[#584140] mt-4 font-headline text-xl">Vous n'avez pas encore d'articles</p>
+        <a href="{{ route('posts.create') }}"
+           class="inline-flex items-center gap-2 mt-6 bg-[#B33A3A] text-white px-8 py-3 rounded-lg font-bold hover:opacity-90 transition-all">
+            <span class="material-symbols-outlined text-sm">add</span>
+            Créer mon premier article
+        </a>
+    </div>
+    @endforelse
+</div>
 
     {{-- Pagination --}}
     <div class="mt-12 flex justify-center">
